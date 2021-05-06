@@ -4,6 +4,7 @@
 
 ## Progress
 * I've learned how to fetch the Pokemon API and display it in the console log
+* Learned how to fetch data from the API and manipulate the DOM Objects (still figuring out how to fetch the moves)
 
 ## Practical Information
 
