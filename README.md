@@ -16,6 +16,7 @@
 * I've added a randomizer (button), that randomly shows a pokémon when pushed (still buggy, shows the evolutions of the past pokemon)
 * Working on showing other evolutions
 * Working on randomizer for moves
+* Working on to preload the content into the divs so they are not empty
 
 ## Notes
 * The pokedex is fully functional and meets the expected features
