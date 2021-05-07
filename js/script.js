@@ -1,11 +1,10 @@
 (() => {
-    let getId;
-    let api_url;
+    let api_url = 'https://pokeapi.co/api/v2/pokemon/1';
     let api_urlSpecies;
     let api_urlEvolve;
 
     // HERE I DEFINE THE DOM OBJECTS
-
+    getData()
     let pokeName = document.querySelector('.poke-name');
     let pokeId = document.querySelector('.poke-id');
     let pokeFrontImage = document.querySelector('.poke-image');
@@ -16,9 +15,10 @@
     let pokeEvolveName = document.querySelector('.poke-evolve-name');
     let pokeEvolveImageFront = document.querySelector('.evolve-image');
     let playerId = document.querySelector('.player-id');
-    let name = prompt ('Hello fellow trainer, what is your name?');
+    let name = prompt('Hello fellow trainer, what is your name?');
 
     // FETCHING THE POKE API
+    getData()
 
     async function getData() {
         let response = await fetch(api_url)
@@ -50,7 +50,7 @@
             pokeEvolveName.innerHTML = (`This pokemon evolves from ${evolveName}`);
             getDataEvolve()
 
-    // ADDED THE ELSE BECAUSE IF I WENT TO IVY AND BACK TO BULBA, BULBA SHOWED UP AS AN EVOLUTION (=INCORRECT)
+            // ADDED THE ELSE BECAUSE IF I WENT TO IVY AND BACK TO BULBA, BULBA SHOWED UP AS AN EVOLUTION (=INCORRECT)
 
         } else {
             evolveName = '';
@@ -67,12 +67,12 @@
         pokeEvolveImageFront.src = dataEvolve.sprites['front_default'];
     }
 
- /*    document.getElementById('btn-random').addEventListener('click', function () {
-        let number = Math.floor(Math.random() * 898) + 1;
-        api_url = "https://pokeapi.co/api/v2/pokemon/" + number;
-        getData()
-    }) */
-    
+    /*    document.getElementById('btn-random').addEventListener('click', function () {
+           let number = Math.floor(Math.random() * 898) + 1;
+           api_url = "https://pokeapi.co/api/v2/pokemon/" + number;
+           getData()
+       }) */
+
     // METHOD WITH EVENT LISTENER
 
     document.getElementById('submitPoke').addEventListener('click', function () {
