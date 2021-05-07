@@ -6,13 +6,16 @@
 * I've learned how to fetch the Pokemon API and display it in the console log
 * Learned how to fetch data from the API and manipulate the DOM Objects (still figuring out how to fetch the moves)
 * Added the moves, not in the best way but it's understandable for now (going to reconsider this later)
+* Fetched a second API to get the evolutions and managed to get the info and output them to html
+* Added an else to the if function, to empty the div if the pokemon has NO evolution
+* Sandbox version is finished (friday 07/05 10h25), the code is somewhat still messy and can use a clean up for more efficiency (will focus on this later), for now I start with css to meet the deadline with a working example.
 
 ## Practical Information
 
 * Repository: `ajax-pokedex`
 * Deadline: 2 days
 * Delivery: Github page (published)
-* Team: groups of 2
+* Team: Solo
 
 ## Learning Objectives
 

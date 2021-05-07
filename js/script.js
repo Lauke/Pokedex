@@ -1,45 +1,76 @@
-// HERE I DEFINE THE DOM OBJECTS
-const pokeName = document.querySelector('.poke-name');
-const pokeId = document.querySelector('.poke-id');
-const pokeFrontImage = document.querySelector('.poke-image');
-const pokeMoveOne = document.querySelector('.poke-move-one');
-const pokeMoveTwo = document.querySelector('.poke-move-two');
-const pokeMoveThree = document.querySelector('.poke-move-three');
-const pokeMoveFour = document.querySelector('.poke-move-four');
+(() => {
+    let getId;
+    let api_url;
+    let api_urlSpecies;
+    let api_urlEvolve;
 
-// FETCHING THE POKE API
-const api_url = ('https://pokeapi.co/api/v2/pokemon/1');
+    // HERE I DEFINE THE DOM OBJECTS
 
+    let pokeName = document.querySelector('.poke-name');
+    let pokeId = document.querySelector('.poke-id');
+    let pokeFrontImage = document.querySelector('.poke-image');
+    let pokeMoveOne = document.querySelector('.poke-move-one');
+    let pokeMoveTwo = document.querySelector('.poke-move-two');
+    let pokeMoveThree = document.querySelector('.poke-move-three');
+    let pokeMoveFour = document.querySelector('.poke-move-four');
+    let pokeEvolveName = document.querySelector('.poke-evolve-name');
+    let pokeEvolveImageFront = document.querySelector('.evolve-image');
 
-// getPokemon is an asynchronous function since it’s marked with the async keyword.
-// Await fetch starts an HTTP request to the API URL. Because the await keyword is present, the asynchronous function is paused until the request completes.
-// When the request completes, response is assigned with the response object of the request.
+    // FETCHING THE POKE API
 
-// THIS DISPLAYS ONE SPECIFIC POKEMON
+    async function getData() {
+        let response = await fetch(api_url)
+        let data = await response.json();
 
-async function getPokemon() {
-    const response = await fetch(api_url);
-    // waits until the request completes...
-    const data = await response.json();
-    console.log(data);
+        // THIS DISPLAYS THE SPECIFIC POKEMON ID
+        pokeName.innerHTML = data.name;
+        pokeId.innerHTML = data.id;
+        pokeFrontImage.src = data.sprites['front_default'];
 
-    // IMPORTING THE ALL MOVES DATA
-    let allMoves = data.moves;
+        // IMPORTING THE ALL MOVES DATA (NOT THE BEST WAY, I HAVE TO IMPROVE THIS)
+        pokeMoveOne.innerHTML = data.moves[0]["move"]["name"];
+        pokeMoveTwo.innerHTML = data.moves[1]["move"]["name"];
+        pokeMoveThree.innerHTML = data.moves[2]["move"]["name"];
+        pokeMoveFour.innerHTML = data.moves[3]["move"]["name"];
+        getDataDex();
 
-    // IMPORTING THE API DATA AND SHOW IT IN THE DIV
-    pokeName.textContent = data.name;
-    pokeId.textContent = data.id;
-    pokeFrontImage.src = data.sprites['front_default'];
+    }
 
-    // IMPORTING THE ALL MOVES DATA (NOT THE BEST WAY, I HAVE TO IMPROVE THIS)
+    // FETCHING THE API
 
-    pokeMoveOne.textContent = data.moves[0]["move"]["name"];
-    pokeMoveTwo.textContent = data.moves[1]["move"]["name"];
-    pokeMoveThree.textContent = data.moves[2]["move"]["name"];
-    pokeMoveFour.textContent = data.moves[3]["move"]["name"];
+    async function getDataDex() {
+        let responseDex = await fetch(api_urlSpecies)
+        let dataDex = await responseDex.json();
+        if (dataDex["evolves_from_species"]) {
+            evolveName = dataDex["evolves_from_species"]["name"];
+            api_urlEvolve = 'https://pokeapi.co/api/v2/pokemon/' + evolveName;
+            pokeEvolveName.innerHTML = (`This pokemon evolves from ${evolveName}`);
+            getDataEvolve()
 
-}
+    // ADDED THE ELSE BECAUSE IF I WENT TO IVY AND BACK TO BULBA, BULBA SHOWED UP AS AN EVOLUTION (=INCORRECT)
 
-getPokemon();
+        } else {
+            evolveName = '';
+            pokeEvolveName.innerHTML = ('');
+            pokeEvolveImageFront.src = ('');
+        }
+    }
 
-// ENDING OF DISPLAY ONE SPECIFIC POKEMON
+    // FETCHING THE FETCHING THE EVOLUTION
+
+    async function getDataEvolve() {
+        let responseEvolve = await fetch(api_urlEvolve)
+        let dataEvolve = await responseEvolve.json();
+        pokeEvolveImageFront.src = dataEvolve.sprites["front_default"];
+    }
+
+    // METHOD WITH EVENT LISTENER
+
+    document.getElementById("submitPoke").addEventListener("click", function () {
+        let getId = (document.getElementById("inputPoke").value).toLowerCase();
+        api_url = 'https://pokeapi.co/api/v2/pokemon/' + getId;
+        api_urlSpecies = 'https://pokeapi.co/api/v2/pokemon-species/' + getId;
+        getData()
+    })
+
+})();
