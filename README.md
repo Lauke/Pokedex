@@ -9,6 +9,17 @@
 * Fetched a second API to get the evolutions and managed to get the info and output them to html
 * Added an else to the if function, to empty the div if the pokemon has NO evolution
 * Sandbox version is finished (friday 07/05 10h25), the code is somewhat still messy and can use a clean up for more efficiency (will focus on this later), for now I start with css to meet the deadline with a working example.
+* I've added CSS using the NESS.css framework
+* I've added an alert that personalizes the pokedex (upper left)
+
+## Still working on
+* I've added a randomizer (button), that randomly shows a pokémon when pushed (still buggy, shows the evolutions of the past pokemon)
+* Working on showing other evolutions
+* Working on randomizer for moves
+
+## Notes
+* The pokedex is fully functional and meets the expected features
+* It is still work in progress, improving & understanding code is priority as some stuff is still bit abstract for me
 
 ## Practical Information
 
